@@ -5,6 +5,7 @@
 	"author": "Spencer",
 	"version": "0.0.1",
 	"minimumCoreVersion": "0.7.6",
+	"compatibleCoreVersion": "0.7.10",
 	"url": "https://github.com/spencer012/FoundryVTT-Circle-of-Awareness",
 	"manifest": "https://raw.githubusercontent.com/spencer012/FoundryVTT-Circle-of-Awareness/main/manifest.json",
 	"scripts": [
