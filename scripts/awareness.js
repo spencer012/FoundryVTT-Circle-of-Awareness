@@ -3,21 +3,21 @@
 const MODULE_ID = "FoundryVTT-Circle-of-Awareness";
 const MODULE_NAME = "Circle of Awareness";
 
-Hooks.on('renderTokenConfig', "on", (app, html, data) => {
+Hooks.on('renderTokenConfig', (app, html, data) => {
 	console.log(app);
 	console.log(html);
 	console.log(data);
 	console.log("------");
 
 	const tokenConfigElement = html[0];
-	const resources = tokenConfigElement.querySelector('.tab[data-tab="vision"]');
+	const vision = tokenConfigElement.querySelector('.tab[data-tab="vision"]');
 	const isAware = tokenConfig.object.getFlag(MODULE_ID, 'isAware');
 	const isAwareCheckboxElement = htmlToElement(`
 		<div class="form-group">
 			<label>Awareness</label>
 			<input type="checkbox" name="${MODULE_ID}-is-aware" data-dtype="Boolean" ${isAware && 'checked'}>
 		</div>`);
-	resources.append(isAwareCheckboxElement);
+	vision.append(isAwareCheckboxElement);
 
 	isAwareCheckboxElement.addEventListener('change', (ev) => {
 		const isChecked = ev?.target?.checked || false;
@@ -30,7 +30,7 @@ Hooks.on('renderTokenConfig', "on", (app, html, data) => {
 			<label>Awareness Radius</label>
 			<input type="number" name="${MODULE_ID}-is-aware" data-dtype="Boolean" value="${isAwareRadius}">
 		</div>`);
-	resources.append(isAwareRadiusCheckboxElement);
+	vision.append(isAwareRadiusCheckboxElement);
 
 	isAwareRadiusCheckboxElement.addEventListener('change', (ev) => {
 		const isChecked = ev?.target?.value || 8;
