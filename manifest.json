@@ -9,5 +9,6 @@
 	"manifest": "https://raw.githubusercontent.com/spencer012/FoundryVTT-Circle-of-Awareness/main/manifest.json",
 	"scripts": [
 		"scripts/awareness.js"
-	]
-  }
+	],
+	"download": "https://github.com/spencer012/FoundryVTT-Circle-of-Awareness/archive/refs/tags/0.0.1.zip"
+}
