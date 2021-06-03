@@ -3,7 +3,7 @@
 	"title": "Circle of Awareness",
 	"description": "Lets you have a small radius around you where you can see.",
 	"author": "Spencer",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"minimumCoreVersion": "0.7.6",
 	"compatibleCoreVersion": "0.7.10",
 	"url": "https://github.com/spencer012/FoundryVTT-Circle-of-Awareness",
