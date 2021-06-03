@@ -11,12 +11,16 @@ function htmlToElement(html) {
 }
 
 function updateAwareness(tokenConfig) {
+	console.log("Trying to update");
+	console.log(tokenConfig);
 	if (tokenConfig.object.getFlag(MODULE_ID, 'isAware')) {
+		console.log("active");
 		var awareness = tokenConfig.token._object.awarenessLight;
 		awareness = awareness || new PointSource(tokenConfig.token._object);
 		awareness.active = true;
 		awareness.initialize(0, 0, 0, tokenConfig.object.getFlag(MODULE_ID, 'isAwareRadius') || 8, 0, 0, 0, 0, 1, {min: 0, max: 0}, CONST.SOURCE_TYPES.LOCAL, null, 0);
 	} else {
+		console.log("unactive");
 		if (awareness) {
 			awareness.active = false;
 		}
@@ -53,5 +57,10 @@ Hooks.on('renderTokenConfig', (tokenConfig, html, data) => {
 		tokenConfig.object.setFlag(MODULE_ID, 'isAwareRadius', value);
 		updateAwareness(tokenConfig);
 	});
+});
+
+Hooks.on('updateTokenConfig', (tokenConfig, html, data) => {
+	console.log("UPDATE");
+	console.log(tokenConfig);
 });
 
