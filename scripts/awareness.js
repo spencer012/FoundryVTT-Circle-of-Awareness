@@ -4,10 +4,10 @@ const MODULE_ID = "FoundryVTT-Circle-of-Awareness";
 const MODULE_NAME = "Circle of Awareness";
 
 function htmlToElement(html) {
-    var template = document.createElement('template');
-    html = html.trim();
-    template.innerHTML = html;
-    return template.content.firstChild;
+	var template = document.createElement('template');
+	html = html.trim();
+	template.innerHTML = html;
+	return template.content.firstChild;
 }
 
 function updateAwareness(tokenConfig) {
@@ -18,7 +18,20 @@ function updateAwareness(tokenConfig) {
 		var awareness = tokenConfig.token._object.awarenessLight;
 		awareness = awareness || new PointSource(tokenConfig.token._object);
 		awareness.active = true;
-		awareness.initialize(0, 0, 0, tokenConfig.object.getFlag(MODULE_ID, 'isAwareRadius') || 8, 0, 0, 0, 0, 1, {min: 0, max: 0}, CONST.SOURCE_TYPES.LOCAL, null, 0);
+		awareness.initialize({ 
+			x: 0, 
+			y: 0, 
+			dim: tokenConfig.object.getFlag(MODULE_ID, 'isAwareRadius') || 8, 
+			bright: 0, 
+			angle: 0, 
+			rotation: 0, 
+			color: 0, 
+			alpha: 1, 
+			darkness: { min: 0, max: 0 }, 
+			type: CONST.SOURCE_TYPES.LOCAL, 
+			animation: null, 
+			seed: 0 
+		});
 	} else {
 		console.log("unactive");
 		if (awareness) {
