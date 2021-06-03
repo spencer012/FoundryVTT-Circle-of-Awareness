@@ -10,12 +10,20 @@ function htmlToElement(html) {
     return template.content.firstChild;
 }
 
-Hooks.on('renderTokenConfig', (tokenConfig, html, data) => {
-	console.log(tokenConfig);
-	console.log(html);
-	console.log(data);
-	console.log("------");
+function updateAwareness(tokenConfig) {
+	if (tokenConfig.object.getFlag(MODULE_ID, 'isAware')) {
+		var awareness = tokenConfig.token._object.awarenessLight;
+		awareness = awareness || new PointSource(tokenConfig.token._object);
+		awareness.active = true;
+		awareness.initialize(0, 0, 0, tokenConfig.object.getFlag(MODULE_ID, 'isAwareRadius') || 8, 0, 0, 0, 0, 1, {min: 0, max: 0}, CONST.SOURCE_TYPES.LOCAL, null, 0);
+	} else {
+		if (awareness) {
+			awareness.active = false;
+		}
+	}
+}
 
+Hooks.on('renderTokenConfig', (tokenConfig, html, data) => {
 	const tokenConfigElement = html[0];
 	const vision = tokenConfigElement.querySelector('.tab[data-tab="vision"]');
 	const isAware = tokenConfig.object.getFlag(MODULE_ID, 'isAware');
@@ -28,7 +36,8 @@ Hooks.on('renderTokenConfig', (tokenConfig, html, data) => {
 
 	isAwareCheckboxElement.addEventListener('change', (ev) => {
 		const isChecked = ev?.target?.checked || false;
-		return tokenConfig.object.setFlag(MODULE_ID, 'isAware', isChecked);
+		tokenConfig.object.setFlag(MODULE_ID, 'isAware', isChecked);
+		updateAwareness(tokenConfig);
 	});
 
 	const isAwareRadius = tokenConfig.object.getFlag(MODULE_ID, 'isAwareRadius') || 8;
@@ -41,6 +50,8 @@ Hooks.on('renderTokenConfig', (tokenConfig, html, data) => {
 
 	isAwareRadiusElement.addEventListener('change', (ev) => {
 		const value = ev?.target?.value || 8;
-		return tokenConfig.object.setFlag(MODULE_ID, 'isAwareRadius', value);
+		tokenConfig.object.setFlag(MODULE_ID, 'isAwareRadius', value);
+		updateAwareness(tokenConfig);
 	});
 });
+
