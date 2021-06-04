@@ -41,7 +41,7 @@ Hooks.on('renderTokenConfig', (tokenConfig, html, data) => {
 });
 
 Hooks.on("init", () => {
-	Token.prototype.updateSource = function updateSource({ defer = false, deleted = false, noUpdateFog = false } = {}) {
+	Token.prototype.updateSource = function updateSource({ defer = false, deleted = false, noUpdateFog = false } = {}) { //taken direct from original, with some modifications
 		if (CONFIG.debug.sight) {
 			SightLayer._performance = { start: performance.now(), tests: 0, rays: 0 }
 		}
@@ -100,7 +100,7 @@ Hooks.on("init", () => {
 				if (!this.awareness) {
 					this.awareness = new PointSource(this, "sight");
 				}
-				
+
 				let dim = Math.min(this.getLightRadius(this.document.getFlag(MODULE_ID, 'isAwareRadius')), d.maxR);
 				this.awareness.initialize({
 					x: origin.x,
