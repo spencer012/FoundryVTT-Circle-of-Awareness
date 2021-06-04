@@ -128,11 +128,10 @@ Hooks.on("init", () => {
 			canvas.sight.sources.set(sourceId, this.vision);
 			if (!defer) {
 				this.vision.drawLight();
-				canvas.sight.refresh({ noUpdateFog });
 			}
 
-			if (this.getFlag(MODULE_ID, 'isAware')) {
-				let dim = Math.min(this.getLightRadius(this.getFlag(MODULE_ID, 'isAwareRadius')), d.maxR);
+			if (this.document.getFlag(MODULE_ID, 'isAware')) {
+				let dim = Math.min(this.getLightRadius(this.document.getFlag(MODULE_ID, 'isAwareRadius')), d.maxR);
 				this.vision.initialize({
 					x: origin.x,
 					y: origin.y,
@@ -143,8 +142,11 @@ Hooks.on("init", () => {
 
 				if (!defer) {
 					this.vision.drawLight();
-					canvas.sight.refresh({ noUpdateFog });
 				}
+			}
+
+			if (!defer) {
+				canvas.sight.refresh({ noUpdateFog });
 			}
 		}
 		else {
