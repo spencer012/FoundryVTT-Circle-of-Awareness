@@ -98,7 +98,7 @@ Hooks.on("init", () => {
 
 			if (this.document.getFlag(MODULE_ID, 'isAware')) {
 				if (!this.awareness) {
-					this.awareness = new PointSource(this, "sight");
+					this.awareness = new PointSource(this, "light");
 				}
 
 				let dim = Math.min(this.getLightRadius(this.document.getFlag(MODULE_ID, 'isAwareRadius')), d.maxR);
@@ -108,6 +108,7 @@ Hooks.on("init", () => {
 					dim: dim,
 					angle: 360
 				});
+				this.awareness.fov = 0;
 				canvas.sight.sources.set(sourceId + MODULE_ID, this.awareness);
 
 				if (!defer) {
