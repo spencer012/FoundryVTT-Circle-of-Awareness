@@ -108,7 +108,7 @@ Hooks.on("init", () => {
 					dim: dim,
 					angle: 360
 				});
-				this.awareness.fov = 0;
+				this.awareness.los = this.awareness.fov; //so that the token will not see all light sources all around them
 				canvas.sight.sources.set(sourceId + MODULE_ID, this.awareness);
 
 				if (!defer) {
